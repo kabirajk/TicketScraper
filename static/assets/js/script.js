@@ -7,7 +7,7 @@ var Scrapper = {
         this.dateInput=$("#dateInput");
         this.chartCanvas=$("#busDataCanvas");
         this.Foundbus=$("#dataTable_info");
-        this.fromto=$("fromtotext");
+        this.fromtotext=$("#fromtotext");
         this.bindEvents();
     },
     bindEvents : function(){
@@ -39,7 +39,8 @@ var Scrapper = {
                     base.scrapped = jsondata
                     base.busdata = JSON.parse(jsondata['scrapped'])
                     base.busUrls = jsondata['queryurls']
-                    base.fromto.text();
+                    let details=Scrapper.scrapped.details
+                    base.fromtotext.text(`${details.fromcity} To ${details.tocity} on ${details.dateOfJourney}`)
                     base.Foundbus.text(`Found ${base.busdata.length} busses`);
                     $(document).trigger('scrapperdetails',{'data':base.busdata});
                 });
