@@ -87,7 +87,7 @@ class RedBus:
         
         dataframe = pd.DataFrame(buses)
         self.dataFrame=dataframe
-        dataframe.to_json('redbus.json',orient='records')
+        # dataframe.to_json('redbus.json',orient='records')
 
    
     def reponse_url(self,from_city={"id":None,"name":None},to_city={"id":None,"name":None},dateOJ={"DD":None,"MMM":None,'YYYY':None}):#fromcity={id,name},tocity={id,name},date=f"{DD}-{MMM}-{YYYY}"
