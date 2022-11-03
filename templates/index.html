@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - Brand</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/fonts/fontawesome-all.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/untitled.css')}}">
+
+    <!-- <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <!-- <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css"> -->
+    <!-- <link rel="stylesheet" href="assets/css/untitled.css"> -->
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><i class="fas fa-spider text-primary" style="font-size: 46px;"></i>
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <h2 class="text-start" style="padding-right: 2px;margin-right: -3px;">Ticket Scrapper</h2>
+                        </form>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-dark mb-0">Dashboard</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 col-xl-3 mb-4">
+                            <div class="card shadow border-start-primary py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>FRom city</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-city text-primary fa-2x text-gray-300"></i></div>
+                                        <div class="col"><input type="text" id="fromcityInput" style="margin-right: 95px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 col-xl-3 mb-4">
+                            <div class="card shadow border-start-success py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>to city</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-city text-primary fa-2x text-gray-300"></i></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12"><input type="text" id="tocityInput"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3 col-xl-3 col-xxl-2 mb-4">
+                            <div class="card shadow border-start-info py-2" style="height: 115.8px;">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col-9 col-sm-8 col-lg-9 col-xl-8 col-xxl-8 me-2">
+                                            <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>DATE of JOURNEY</span></div>
+                                        </div>
+                                        <div class="col-2 col-sm-3 col-lg-2 col-xl-2 col-xxl-2"><i class="far fa-calendar-check text-primary fa-2x text-gray-300" style="font-size: 30px;"></i></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-9 col-xxl-12"><input id="dateInput" type="date" style="height: 29px;width: 188.2px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" id="fetchButton" href="#"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a></div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4" style="width: 850px;border-color: var(--bs-purple);" id="fromtotext">from to&nbsp;</h3>
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 fw-bold" style="width: 150px;height: 40px;font-size: 28px;">Bus Details</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-xxl-2">
+                                <div class="text-md-end dataTables_filter" id="dataTable_filter"><input type="search" id="searchbus" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search" style="text-align: left;"><label class="form-label"></label></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 341.2px;">Travels name</th>
+                                                <th style="width: 117.4px;">Type</th>
+                                                <th style="width: 117.4px;">redbus&nbsp;<span class="text-start"><i class="fas fa-bus-alt" style="font-size: 27px;"></i></span></th>
+                                                <th class="text-start" style="width: 109.4px;">ixigo&nbsp;<span class="text-start"><i class="fas fa-bus-alt" style="font-size: 27px;"></i></span></th>
+                                                <th class="text-start" style="width: 109.4px;">easemytrip<span class="text-start"><i class="fas fa-bus-alt" style="font-size: 27px;"></i></span></th>
+                                                <th style="width: 143.4px;">start of journey</th>
+                                                <th style="width: 143.4px;">Board Points</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tablebody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6 align-self-center">
+                                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Found 100 buses</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="margin: 2%;">
+                <div class="card-body" style="margin: 2%;">
+                    <h4 class="card-title">Title</h4>
+                    <div class="container">
+                        <div><canvas id="busDataCanvas">
+                        </canvas></div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div></div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="{{url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/js/chart.min.js')}}" ></script>
+    <!-- <script src="{{url_for('static', filename='assets/js/bs-init.js')}}"></script> -->
+    <script src="{{url_for('static', filename='assets/js/theme.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/js/script.js')}}"></script>
+    <script>
+        Scrapper.init()
+    </script>
+</body>
+
+</html>
+
+<!-- '[{"name":"Tranz king travels","startTime":"2022-11-10 23:00:00","endtime":"2022-11-11
+05:00:00","boardpoint":"Kumbakonam","depaturepoint":"Koyambedu","Bpcount":2,"btype":"A/C Sleeper
+(2+1)","rbFare":1100,"ixigoFare":"false","startepoch":1668101400,"endepoch":1668123000},{"name":"Rathimeena
+Travels","startTime":"2022-11-10 23:00:00","endtime":"2022-11-11 05:00:00","boardpoint":"Rathimeena Office Nr Old Bus
+Stand","depaturepoint":"Koyambedu","Bpcount":2,"btype":"NON AC Seater / Sleeper
+2+1","rbFare":540,"ixigoFare":"false","startepoch":1668101400,"endepoch":1668123000},{"name":"Rathimeena Travels
+C","startTime":"2022-11-10 22:30:00","endtime":"2022-11-11 04:30:00","boardpoint":"Rathimeena Office Nr Old Bus
+Stand","depaturepoint":"Koyambedu","Bpcount":2,"btype":"NON A/C Seater
+(1+1+1)","rbFare":540,"ixigoFare":"false","startepoch":1668099600,"endepoch":1668121200},{"name":"YBM
+Travels","startTime":"2022-11-10 23:30:00","endtime":"2022-11-11
+05:30:00","boardpoint":"Kumbakonam.","depaturepoint":"Koyambedu","Bpcount":2,"btype":"A/C Sleeper
+(2+1)","rbFare":790,"ixigoFare":"false","startepoch":1668103200,"endepoch":1668124800},{"name":"Rathimeena Travels
+A","startTime":"2022-11-10 23:30:00","endtime":"2022-11-11 05:30:00","boardpoint":"Rathimeena Office Nr Old Bus
+Stand","depaturepoint":"Koyambedu","Bpcount":2,"btype":"Capella A/C Sleeper
+(2+1)","rbFare":667,"ixigoFare":"false","startepoch":1668103200,"endepoch":1668124800},{"name":"Tranz king
+travels","startTime":"2022-11-10 13:00:00","endtime":"2022-11-10
+19:15:00","boardpoint":"Kumbakonam","depaturepoint":"Koyambedu","Bpcount":1,"btype":"A/C Sleeper
+(2+1)","rbFare":850,"ixigoFare":"false","startepoch":1668065400,"endepoch":1668087900},{"name":"Rathimeena Travels
+A","startTime":"2022-11-10 23:50:00","endtime":"2022-11-11
+05:30:00","boardpoint":"Kumbakonam","depaturepoint":"Koyambedu","Bpcount":2,"btype":"NON AC Seater / Sleeper
+2+1","rbFare":540,"ixigoFare":"false","startepoch":1668104400,"endepoch":1668124800},{"name":"Shri Bhagiyalakshimi
+Travels","startTime":"2022-11-10 23:50:00","endtime":"2022-11-11
+06:10:00","boardpoint":"Kumbakonam","depaturepoint":"Koyambedu","Bpcount":1,"btype":"NON AC Seater / Sleeper
+2+1","rbFare":990,"ixigoFare":"false","startepoch":1668104400,"endepoch":1668127200},{"name":"Shri Bhagiyalakshimi
+Travels","startTime":"2022-11-10 23:55:00","endtime":"2022-11-11
+05:45:00","boardpoint":"Kumbakonam","depaturepoint":"Perungalathur","Bpcount":1,"btype":"NON A/C Seater/ Sleeper
+(2+1)","rbFare":790,"ixigoFare":"false","startepoch":1668104700,"endepoch":1668125700},{"name":"DELTAKING
+TRAVELS","startTime":"2022-11-10 23:50:00","endtime":"2022-11-11 06:35:00","boardpoint":"Near Chennai
+Silks","depaturepoint":"Koyambedu","Bpcount":1,"btype":"NON AC Seater / Sleeper
+2+1","rbFare":547,"ixigoFare":"false","startepoch":1668104400,"endepoch":1668128700},{"name":"DELTAKING
+TRAVELS","startTime":"2022-11-10 23:50:00","endtime":"2022-11-11 06:35:00","boardpoint":"Near Chennai
+Silks","depaturepoint":"Koyambedu","Bpcount":1,"btype":"NON AC Seater / Sleeper
+2+1","rbFare":2000,"ixigoFare":"false","startepoch":1668104400,"endepoch":1668128700},{"name":"AALIA
+TRAVELS","startTime":"2022-11-10 23:45:00","endtime":"2022-11-11
+05:30:00","boardpoint":"Kumbakonam","depaturepoint":"Koyambedu","Bpcount":1,"btype":"NON A/C Seater/ Sleeper
+(2+1)","rbFare":500,"ixigoFare":"false","startepoch":1668104100,"endepoch":1668124800},{"name":"GGR
+TRAVELS","startTime":"2022-11-10 22:45:00","endtime":"2022-11-11
+06:20:00","boardpoint":"Kumbakonam","depaturepoint":"Koyambedu","Bpcount":1,"btype":"A/C Sleeper
+(2+1)","rbFare":850,"ixigoFare":"false","startepoch":1668100500,"endepoch":1668127800},{"name":"Sky
+Bus","startTime":"2022-11-10 23:00:00","endtime":"2022-11-11 04:00:00","boardpoint":"New Bus
+Stand","depaturepoint":"Chengalpattu","Bpcount":1,"btype":"AC Seater
+2+2","rbFare":1049,"ixigoFare":"false","startepoch":1668101400,"endepoch":1668119400},{"name":"Dhanuja
+Travels","startTime":"2022-11-10 23:15:00","endtime":"2022-11-11
+05:00:00","boardpoint":"Kumbakonam","depaturepoint":"Koyambedu","Bpcount":1,"btype":"A/C Sleeper
+(2+1)","rbFare":800,"ixigoFare":"false","startepoch":1668102300,"endepoch":1668123000},{"name":"Shri Bhagiyalakshimi
+Travels","startTime":"2022-11-10 23:59:00","endtime":"2022-11-11
+06:10:00","boardpoint":"Kumbakonam","depaturepoint":"Mannadi","Bpcount":1,"btype":"NON A/C Seater/ Sleeper
+(2+1)","rbFare":790,"ixigoFare":"false","startepoch":1668104940,"endepoch":1668127200},{"name":"Shanmuga
+Travels","startTime":"2022-11-10 22:15:00","endtime":"2022-11-11
+05:45:00","boardpoint":"Kumbakonam","depaturepoint":"Koyambedu","Bpcount":1,"btype":"NON A/C Semi Sleeper
+(2+2)","rbFare":369,"ixigoFare":"false","startepoch":1668098700,"endepoch":1668125700},{"name":"Rathimeena Travels
+A","startTime":"2022-11-10 23:00:00","endtime":"2022-11-11 05:00:00","boardpoint":"Rathimeena Office Nr Old Bus
+Stand","depaturepoint":"Koyambedu","Bpcount":2,"btype":"NON AC Seater / Sleeper
+2+1","rbFare":540,"ixigoFare":"false","startepoch":1668101400,"endepoch":1668123000},{"name":"Orange Tours And
+Travels","startTime":"2022-11-10 23:45:00","endtime":"2022-11-11 05:30:00","boardpoint":"kumbakonam RPG
+TRAVELS","depaturepoint":"Ashok Pillar","Bpcount":2,"btype":"Bharat Benz A/C Sleeper
+(2+1)","rbFare":800,"ixigoFare":"false","startepoch":1668104100,"endepoch":1668124800},{"name":"J.MITHRAN
+TRAVELS","startTime":"2022-11-10 22:30:00","endtime":"2022-11-11
+05:30:00","boardpoint":"Kumbakonam","depaturepoint":"Koyambedu","Bpcount":1,"btype":"NON A/C Semi Sleeper
+(2+2)","rbFare":1500,"ixigoFare":"false","startepoch":1668099600,"endepoch":1668124800},{"name":"J J
+YATRA","startTime":"2022-11-10 22:45:00","endtime":"2022-11-11
+05:20:00","boardpoint":"Kumbakonam","depaturepoint":"Koyambedu Omni Bus Stand","Bpcount":1,"btype":"A/C Sleeper
+(2+1)","rbFare":595,"ixigoFare":"false","startepoch":1668100500,"endepoch":1668124200},{"name":"SK
+Transport","startTime":"2022-11-10 23:50:00","endtime":"2022-11-11 05:45:00","boardpoint":"Sk Jai
+Travels","depaturepoint":"Koyambedu","Bpcount":3,"btype":"NON A/C Sleeper
+(2+1)","rbFare":800,"ixigoFare":"false","startepoch":1668104400,"endepoch":1668125700},{"name":"AALIA
+TRAVELS","startTime":"2022-11-10 23:45:00","endtime":"2022-11-11
+04:00:00","boardpoint":"Kumbakonam","depaturepoint":"Chennai","Bpcount":1,"btype":"NON-AC Seater/Sleeper (2 +
+1)","rbFare":"false","ixigoFare":500,"startepoch":1668104100,"endepoch":1668119400},{"name":"Rathimeena
+Travels","startTime":"2022-11-10 23:00:00","endtime":"2022-11-11
+04:30:00","boardpoint":"Kumbakonam","depaturepoint":"Chennai","Bpcount":2,"btype":"NON-AC Seater/Sleeper (2 +
+1)","rbFare":"false","ixigoFare":540,"startepoch":1668101400,"endepoch":1668121200},{"name":"YBM
+Travels","startTime":"2022-11-10 23:30:00","endtime":"2022-11-11
+04:25:00","boardpoint":"Kumbakonam","depaturepoint":"Chennai","Bpcount":2,"btype":"AC Sleeper (2 +
+1)","rbFare":"false","ixigoFare":790,"startepoch":1668103200,"endepoch":1668120900},{"name":"Orange Tours and
+Travels","startTime":"2022-11-10 23:30:00","endtime":"2022-11-11
+02:00:00","boardpoint":"Kumbakonam","depaturepoint":"Chennai","Bpcount":2,"btype":"AC Sleeper (2 +
+1)","rbFare":"false","ixigoFare":800,"startepoch":1668103200,"endepoch":1668112200},{"name":"GGR
+Travels","startTime":"2022-11-10 22:45:00","endtime":"2022-11-11
+04:45:00","boardpoint":"Kumbakonam","depaturepoint":"Chennai","Bpcount":1,"btype":"AC Sleeper (2 +
+1)","rbFare":"false","ixigoFare":850,"startepoch":1668100500,"endepoch":1668122100}]' -->
