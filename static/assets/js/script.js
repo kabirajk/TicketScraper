@@ -8,6 +8,7 @@ var Scrapper = {
         this.chartCanvas=$("#busDataCanvas");
         this.Foundbus=$("#dataTable_info");
         this.fromtotext=$("#fromtotext");
+        this.seachBox=$("#searchbus");
         this.bindEvents();
     },
     bindEvents : function(){
@@ -40,7 +41,11 @@ var Scrapper = {
                     base.busdata = JSON.parse(jsondata['scrapped'])
                     base.busUrls = jsondata['queryurls']
                     let details=Scrapper.scrapped.details
-                    base.fromtotext.text(`${details.fromcity} To ${details.tocity} on ${details.dateOfJourney}`)
+                    base.fromtotext.html(`${details.fromcity} To ${details.tocity} on ${details.dateOfJourney} 
+                    <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" target="_blank" href="${base.busUrls['rb']}">RedBus</a>
+                    <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" target="_blank" href="${base.busUrls['ix']}">Ixigo</a>
+                    <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" target="_blank" href="${base.busUrls['emt']}">EaseMytrip</a>
+                    `);
                     base.Foundbus.text(`Found ${base.busdata.length} busses`);
                     $(document).trigger('scrapperdetails',{'data':base.busdata});
                 });
@@ -64,6 +69,9 @@ var Scrapper = {
             data.push(base.getDataFrom('emtFare'))
             base.addData(base.chartObject,base.getDataFrom('name'),data)
         }
+       });
+       base.seachBox.on('keyup',function(ev){
+        base.searchBus()
        });
     },
     createTabrow : function( busObject){
@@ -178,6 +186,17 @@ var Scrapper = {
         chart.update();
     },
     searchBus : function(){
-
+        let busnames=$(".bus-name");
+        let seachquery = $("#searchbus").val();
+        $.each(busnames,function(index,data){
+            let busname = $(data).text()
+            busname=busname.toLowerCase()
+            if(busname.indexOf(seachquery)==-1){
+                $(data).closest('tr').hide();
+            }
+            else{
+                $(data).closest('tr').show();
+            }
+        });
     }
 };
