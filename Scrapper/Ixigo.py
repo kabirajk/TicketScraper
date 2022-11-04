@@ -93,4 +93,6 @@ class Ixigo:
         return redbus_query_url
     def decompressdata(self,dataOfRequest):
         data=json.loads(brotli.decompress(dataOfRequest).decode())
+        if( not data.get('data') and not (data.get('data')).get('busServices') ):
+            return None
         return data['data']['busServices']

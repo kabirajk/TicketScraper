@@ -23,7 +23,12 @@ class scrapper:
         self.dateOfJourney=dateOfJourney
         self.busObject=[]
         self.mergedDataFrame=None
-        self.webdriver=webdriver.Chrome(executable_path='D:\ytdl\TicketScrapper\TicketScraper\Scrapper\chromedriver.exe');
+        Chromeoptions=webdriver.ChromeOptions()
+        # user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
+        user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.53'
+        Chromeoptions.add_argument(f'user-agent={user_agent}')
+        Chromeoptions.add_argument('--headless')
+        self.webdriver=webdriver.Chrome(executable_path='D:\ytdl\TicketScrapper\TicketScraper\Scrapper\chromedriver.exe',options=Chromeoptions);
         self.busObject.append(RedBus(fromcity,tocity,dateOfJourney))
         self.busObject.append(Ixigo(fromcity,tocity,dateOfJourney))
         self.busObject.append(EaseMyTrip(fromcity,tocity,dateOfJourney))
@@ -52,7 +57,9 @@ class scrapper:
         return urls
     def mergeDataframes(self,dataframe,fareList):
         print(fareList)
-        # print(type(dataframe))
+        print(type(dataframe))
+        if(type(dataframe) == type(None)):
+            return
         merged=pd.merge(self.mergedDataFrame,dataframe,how="outer",on=['name','startepoch','endepoch'])
         merged=merged.fillna(False)
         newmerged=pd.DataFrame()
@@ -119,4 +126,4 @@ class scrapper:
                     f.write(str(data))
             
         # self.webdriver.quit()
-        self.webdriver.implicitly_wait(5)
+        # self.webdriver.implicitly_wait(5)

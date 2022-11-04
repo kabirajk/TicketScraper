@@ -88,4 +88,6 @@ class EaseMyTrip:
 
     def decompressdata(self,dataOfRequest):
         data=json.loads(brotli.decompress(dataOfRequest).decode())
+        if( not data.get('Response') and not (data.get('Response')).get('AvailableTrips') ):
+            return None
         return data['Response']['AvailableTrips']

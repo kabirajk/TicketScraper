@@ -14,12 +14,15 @@ def get_busdetails():
         file=open(input_json['fromcity']+input_json['tocity']+formatedDate+'.json')
         jsondata=json.load(file)
         return jsonify(jsondata)
-
-    scrapped = scrapper(input_json['fromcity'],input_json['tocity'],formatedDate)
-    print(type(scrapped.mergedDataFrame))
-    alreadyhave ={'details':input_json,'scrapped':scrapped.return_json(),'queryurls':scrapped.getSearchQuery()}
-    # json.dump(alreadyhave)
-    return jsonify(alreadyhave)
+    try:
+        scrapped = scrapper(input_json['fromcity'],input_json['tocity'],formatedDate)
+        print(type(scrapped.mergedDataFrame))
+        alreadyhave ={'details':input_json,'scrapped':scrapped.return_json(),'queryurls':scrapped.getSearchQuery()}
+        # json.dump(alreadyhave)
+        return jsonify(alreadyhave)
+    except :
+        print("exception")
+        return jsonify({'error':"we faced some error please try after some time"})
     # scrapped.mergedDataFrame.to_json(input_json['fromcity']+input_json['tocity']+formatedDate+'.json',orient='records')
 
     return alreadyhave

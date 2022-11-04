@@ -37,6 +37,10 @@ var Scrapper = {
         }).then((response)=>{
             if(response.ok){
                 response.json().then((jsondata)=>{
+                    if(jsondata['error'] != undefined){
+                        base.fromtotext.text(jsondata['error'])
+                    }
+                    else{
                     base.scrapped = jsondata
                     base.busdata = JSON.parse(jsondata['scrapped'])
                     base.busUrls = jsondata['queryurls']
@@ -48,6 +52,7 @@ var Scrapper = {
                     `);
                     base.Foundbus.text(`Found ${base.busdata.length} busses`);
                     $(document).trigger('scrapperdetails',{'data':base.busdata});
+                    }
                 });
             }
             });
