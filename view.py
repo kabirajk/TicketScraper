@@ -20,8 +20,8 @@ def get_busdetails():
         alreadyhave ={'details':input_json,'scrapped':scrapped.return_json(),'queryurls':scrapped.getSearchQuery()}
         # json.dump(alreadyhave)
         return jsonify(alreadyhave)
-    except :
-        print("exception")
+    except  Exception as error:
+        print("exception",error)
         return jsonify({'error':"we faced some error please try after some time"})
     # scrapped.mergedDataFrame.to_json(input_json['fromcity']+input_json['tocity']+formatedDate+'.json',orient='records')
 

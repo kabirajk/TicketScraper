@@ -75,9 +75,9 @@ class Ixigo:
             # buses['bplist'].append(str(i['bpData']))
             # buses['rbfareList'].append(str(i['frLst']))
             buses['startTime'].append(i['journeyDate']+" "+i['startTime'])
-            buses['endtime'].append(i['droppingPoints'][0]['arrivalDateTime'].replace('T',' '))
+            buses['endtime'].append(i['droppingPoints'][len(i['droppingPoints'])-1]['arrivalDateTime'].replace('T',' '))
             buses['startepoch'].append(getepochtime(i['journeyDate']+" "+i['startTime']))
-            buses['endepoch'].append(getepochtime(i['droppingPoints'][0]['arrivalDateTime'].replace('T',' ')))
+            buses['endepoch'].append(getepochtime(i['droppingPoints'][len(i['droppingPoints'])-1]['arrivalDateTime'].replace('T',' ')))
 
         dataframe = pd.DataFrame(buses)
         self.dataFrame=dataframe
