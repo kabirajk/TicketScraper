@@ -25,7 +25,7 @@ def get_busdetails():
         return jsonify({'error':"we faced some error please try after some time"})
     # scrapped.mergedDataFrame.to_json(input_json['fromcity']+input_json['tocity']+formatedDate+'.json',orient='records')
 
-    return alreadyhave
+    # return alreadyhave
     
 @app.route('/')
 def hello_world():
