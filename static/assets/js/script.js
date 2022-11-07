@@ -194,6 +194,7 @@ var Scrapper = {
         let busnames=$(".bus-name");
         let seachquery = $("#searchbus").val();
         seachquery.toLowerCase()
+        seachquery.trim()
         $.each(busnames,function(index,data){
             let busname = $(data).text()
             busname=busname.toLowerCase()
