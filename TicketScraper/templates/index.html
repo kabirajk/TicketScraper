@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - Brand</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/fonts/fontawesome-all.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/untitled.css')}}">
+
+    <!-- <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <!-- <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css"> -->
+    <!-- <link rel="stylesheet" href="assets/css/untitled.css"> -->
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><i class="fas fa-spider text-primary" style="font-size: 46px;"></i>
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <h2 class="text-start" style="padding-right: 2px;margin-right: -3px;">Ticket Scrapper</h2>
+                        </form>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-dark mb-0">Dashboard</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 col-xl-3 mb-4">
+                            <div class="card shadow border-start-primary py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>FRom city</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-city text-primary fa-2x text-gray-300"></i></div>
+                                        <div class="col"><input type="text" id="fromcityInput" style="margin-right: 95px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 col-xl-3 mb-4">
+                            <div class="card shadow border-start-success py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>to city</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-city text-primary fa-2x text-gray-300"></i></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12"><input type="text" id="tocityInput"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3 col-xl-3 col-xxl-2 mb-4">
+                            <div class="card shadow border-start-info py-2" style="height: 115.8px;">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col-9 col-sm-8 col-lg-9 col-xl-8 col-xxl-8 me-2">
+                                            <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>DATE of JOURNEY</span></div>
+                                        </div>
+                                        <div class="col-2 col-sm-3 col-lg-2 col-xl-2 col-xxl-2"><i class="far fa-calendar-check text-primary fa-2x text-gray-300" style="font-size: 30px;"></i></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-9 col-xxl-12"><input id="dateInput" type="date" style="height: 29px;width: 188.2px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" id="fetchButton" href="#"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a></div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4" style="width: 850px;border-color: var(--bs-purple);" id="fromtotext"></h3>
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 fw-bold" style="width: 150px;height: 40px;font-size: 28px;">Bus Details</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-xxl-2">
+                                <div class="text-md-end dataTables_filter" id="dataTable_filter"><input type="search" id="searchbus" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search" style="text-align: left;"><label class="form-label"></label></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 341.2px;">Travels name</th>
+                                                <th style="width: 117.4px;">Type</th>
+                                                <th style="width: 117.4px;">redbus&nbsp;<span class="text-start"><i class="fas fa-bus-alt" style="font-size: 27px;"></i></span></th>
+                                                <th class="text-start" style="width: 109.4px;">ixigo&nbsp;<span class="text-start"><i class="fas fa-bus-alt" style="font-size: 27px;"></i></span></th>
+                                                <th class="text-start" style="width: 109.4px;">easemytrip<span class="text-start"><i class="fas fa-bus-alt" style="font-size: 27px;"></i></span></th>
+                                                <th style="width: 143.4px;">start of journey</th>
+                                                <th style="width: 143.4px;">end of journey</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tablebody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6 align-self-center">
+                                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="margin: 2%;">
+                <div class="card-body" style="margin: 2%;">
+                    <h4 class="card-title">Charts</h4>
+                    <div class="container">
+                        <div><canvas id="busDataCanvas">
+                        </canvas></div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div></div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="{{url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/js/chart.min.js')}}" ></script>
+    <!-- <script src="{{url_for('static', filename='assets/js/bs-init.js')}}"></script> -->
+    <script src="{{url_for('static', filename='assets/js/theme.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/js/script.js')}}"></script>
+    <script>
+        Scrapper.init()
+    </script>
+</body>
+
+</html>
