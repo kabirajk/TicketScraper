@@ -1,6 +1,7 @@
 from time import sleep
 import pandas as pd
 from seleniumwire import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 import gzip,requests,json,brotli,datetime,os
 
 def getepochtime(datestr):
@@ -30,7 +31,7 @@ class scrapper:
         Chromeoptions.add_argument('--headless')
         driverPath=os.getcwd()+"\TicketScraper\Scrapper\chromedriver.exe"
         # print(os.getcwd())
-        self.webdriver=webdriver.Chrome(executable_path=driverPath,options=Chromeoptions);
+        self.webdriver=webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=Chromeoptions);
         self.busObject.append(RedBus(fromcity,tocity,dateOfJourney))
         self.busObject.append(Ixigo(fromcity,tocity,dateOfJourney))
         self.busObject.append(EaseMyTrip(fromcity,tocity,dateOfJourney))
