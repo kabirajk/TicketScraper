@@ -1,7 +1,7 @@
 from time import sleep
 import pandas as pd
 from seleniumwire import webdriver
-import gzip,requests,json,brotli,datetime
+import gzip,requests,json,brotli,datetime,os
 
 def getepochtime(datestr):
     # datestr=datestr.replace("T"," ")
@@ -28,7 +28,9 @@ class scrapper:
         user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.53'
         Chromeoptions.add_argument(f'user-agent={user_agent}')
         Chromeoptions.add_argument('--headless')
-        self.webdriver=webdriver.Chrome(executable_path='D:\ytdl\TicketScrapper\TicketScraper\Scrapper\chromedriver.exe',options=Chromeoptions);
+        driverPath=os.getcwd()+"\TicketScraper\Scrapper\chromedriver.exe"
+        # print(os.getcwd())
+        self.webdriver=webdriver.Chrome(executable_path=driverPath,options=Chromeoptions);
         self.busObject.append(RedBus(fromcity,tocity,dateOfJourney))
         self.busObject.append(Ixigo(fromcity,tocity,dateOfJourney))
         self.busObject.append(EaseMyTrip(fromcity,tocity,dateOfJourney))
@@ -46,7 +48,7 @@ class scrapper:
         self.mergedDataFrame=self.busObject[0].dataFrame
         fareList=['rbFare','ixigoFare','emtFare']
         for i in range(1,len(self.busObject)):
-            print(type(self.busObject[i].dataFrame))
+            # print(type(self.busObject[i].dataFrame))
             self.mergeDataframes(self.busObject[i].dataFrame,fareList[:i+1])
         return self.mergedDataFrame.to_json(orient='records')
     def getSearchQuery(self):
@@ -56,7 +58,7 @@ class scrapper:
         urls['emt']=self.busObject[2].searchQuery;
         return urls
     def mergeDataframes(self,dataframe,fareList):
-        print(fareList)
+        # print(fareList)
         print(type(dataframe),dataframe)
         if(type(dataframe) == type(None)):
             return

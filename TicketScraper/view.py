@@ -2,7 +2,7 @@ from TicketScraper import app
 import json,os
 import pandas as pd
 from flask import request,jsonify,render_template
-from Scrapper.scraper import scrapper
+from .Scrapper.scraper import scrapper
 
 @app.route('/fecthbus',methods=['POST'])
 def get_busdetails():
@@ -16,7 +16,7 @@ def get_busdetails():
         return jsonify(jsondata)
     try:
         scrapped = scrapper(input_json['fromcity'],input_json['tocity'],formatedDate)
-        print(type(scrapped.mergedDataFrame))
+        # print(type(scrapped.mergedDataFrame))
         alreadyhave ={'details':input_json,'scrapped':scrapped.return_json(),'queryurls':scrapped.getSearchQuery()}
         # json.dump(alreadyhave)
         return jsonify(alreadyhave)
