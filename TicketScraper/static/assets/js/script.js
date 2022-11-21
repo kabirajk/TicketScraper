@@ -14,7 +14,9 @@ var Scrapper = {
     bindEvents : function(){
        var base = this;
        base.fetchButton.on('click',function(event){
-        event.preventDefault()
+        event.preventDefault();
+        base.tableBody.empty();
+        base.chartCanvas.css("visibility", "hidden");
         let forminput={
             'fromcity' : base.fromcityInput.val(),
             'tocity' : base.tocityInput.val(),
@@ -60,6 +62,7 @@ var Scrapper = {
        $(document).on('scrapperdetails',function(ev,data){
         console.log(data);
         base.tableBody.empty();
+        base.chartCanvas.css("visibility", "visible");
         $.each(data.data,function(index,busObject){
             base.tableBody.append(base.createTabrow(busObject));
         });
@@ -83,9 +86,9 @@ var Scrapper = {
         return $(`<tr>
         <td class="bus-name">${busObject.name}</td>
         <td>${busObject.type}</td>
-        <td>${busObject.rbFare!='false'?busObject.rbFare:'None'}</td>
-        <td>${busObject.ixigoFare!='false'?busObject.ixigoFare:'None'}</td>
-        <td>${busObject.emtFare!='false'?busObject.emtFare:'None'}</td>
+        <td>${busObject.rbFare!='false' &&  typeof busObject.rbFare !='undefined'?busObject.rbFare:'None'}</td>
+        <td>${busObject.ixigoFare!='false'&& typeof busObject.ixigoFare !='undefined'?busObject.ixigoFare:'None'}</td>
+        <td>${busObject.emtFare!='false' && typeof busObject.emtFare!='undefined'?busObject.emtFare:'None'}</td>
         <td>${busObject.startTime}</td>
         <td>${busObject.endtime}</td>
         </tr>`);
@@ -103,6 +106,9 @@ var Scrapper = {
             }
             else{
                 if(typestr.endsWith('Fare')){
+                    if(typeof bus[typestr]== "undefined"){
+                        value = 0
+                    }
                     if(bus[typestr]=='false'){
                         value=0
                     }

@@ -93,7 +93,11 @@ class EaseMyTrip:
         return redbus_query_url
 
     def decompressdata(self,dataOfRequest):
-        data=json.loads(brotli.decompress(dataOfRequest).decode())
+        data=None
+        try:
+            data=json.loads(brotli.decompress(dataOfRequest).decode())
+        except Exception as error:
+            return None;
         if( not data.get('Response') and not (data.get('Response')).get('AvailableTrips') ):
             return None
         if(len(data['Response']['AvailableTrips'])==0):

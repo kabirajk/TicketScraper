@@ -93,7 +93,11 @@ class Ixigo:
         redbus_query_url=f"https://www.ixigo.com/search/result/bus/{from_city['id']}/{to_city['id']}/{dateOJ}"
         return redbus_query_url
     def decompressdata(self,dataOfRequest):
-        data=json.loads(brotli.decompress(dataOfRequest).decode())
+        data=None
+        try:
+            data=json.loads(brotli.decompress(dataOfRequest).decode())
+        except Exception as error:
+            return None;
         if( not data.get('data') and not (data.get('data')).get('busServices') ):
             return None
         return data['data']['busServices']

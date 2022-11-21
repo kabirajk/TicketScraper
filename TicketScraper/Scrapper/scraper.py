@@ -49,7 +49,7 @@ class scrapper:
         self.mergedDataFrame=self.busObject[0].dataFrame
         fareList=['rbFare','ixigoFare','emtFare']
         for i in range(1,len(self.busObject)):
-            # print(type(self.busObject[i].dataFrame))
+            print(self.busObject[i].dataFrame)
             self.mergeDataframes(self.busObject[i].dataFrame,fareList[:i+1])
         return self.mergedDataFrame.to_json(orient='records')
     def getSearchQuery(self):
@@ -130,4 +130,4 @@ class scrapper:
                 break
             
         # self.webdriver.quit()
-        self.webdriver.implicitly_wait(5)
+        # self.webdriver.implicitly_wait(5)
