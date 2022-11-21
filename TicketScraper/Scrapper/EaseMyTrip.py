@@ -34,9 +34,13 @@ class EaseMyTrip:
         url=f"https://busservice.easemytrip.com/api/search/getsourcecity?id={cityname.title()}"
         response=requests.get(url);
         response=response.json();
+        i=None
         for i in response:
             if(i['name'] == cityname.title()):
+                print(i,"rrore")
                 return i;
+        raise ValueError("cityNotFound "+cityname)
+        
     def gettime(self,l):
         l=l.replace('T'," ")
         l=l.replace('+'," ")
@@ -84,11 +88,14 @@ class EaseMyTrip:
 
     def form_queryurl(self,from_city={"id":None,"name":None},to_city={"id":None,"name":None},dateOJ={"DD":None,"MMM":None,'YYYY':None}):
         print(type(from_city),type(to_city),dateOJ)
+        # print(from_city,to_city,dateOJ)
         redbus_query_url=f"https://bus.easemytrip.com/home/list?org={from_city['name']}&des={to_city['name']}&date={dateOJ}&searchid={from_city['id']}_{to_city['id']}"
         return redbus_query_url
 
     def decompressdata(self,dataOfRequest):
         data=json.loads(brotli.decompress(dataOfRequest).decode())
         if( not data.get('Response') and not (data.get('Response')).get('AvailableTrips') ):
+            return None
+        if(len(data['Response']['AvailableTrips'])==0):
             return None
         return data['Response']['AvailableTrips']

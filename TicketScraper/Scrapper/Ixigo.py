@@ -46,7 +46,7 @@ class Ixigo:
             newlist=[]
             for area in response:
                 newlist.append(self.getcitylist(area))
-        # print(newlist[0]['name'])
+        print(cityname,newlist[0])
         return newlist[0]
 
     def getessentialdetails(self,data:dict):
